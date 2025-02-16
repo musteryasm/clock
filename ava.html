@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffe6e6, #ffb3d9);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 3px solid #ff80bf;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .initial-text {
+      color: #ff4d94;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .message {
+      display: none;
+      color: #ff1a75;
+      font-size: 3rem;
+      font-weight: bold;
+      animation: bounce 1s infinite;
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: float 4s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+  <div class="card" onclick="showMessage()">
+    <div class="initial-text">For Ava 🌸</div>
+    <div class="message" id="message">GET WELL SOON! 🌟</div>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message').style.display = 'block';
+      document.getElementById('hearts').style.display = 'block';
+      createHearts();
+    }
+
+    function createHearts() {
+      const hearts = document.getElementById('hearts');
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.innerHTML = '💖';
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          hearts.appendChild(heart);
+          setTimeout(() => heart.remove(), 4000);
+        }, i * 200);
+      }
+    }
+  </script>
+</body>
+</html>
